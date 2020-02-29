@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("CheckResult")
     private void loadPhotos() {
-        mCompositeDisposable.add(ApiUtils.getApi().getRecentPhotos()
+        mCompositeDisposable.add(ApiUtils.getApi().getRecentPhotos(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<PhotoResponse>() {

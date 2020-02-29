@@ -1,10 +1,10 @@
 package com.khusainov.rinat.flickr.presentation.utils;
 
 import com.google.gson.Gson;
+import com.khusainov.rinat.flickr.BuildConfig;
 import com.khusainov.rinat.flickr.Constants;
 import com.khusainov.rinat.flickr.data.api.ApiKeyInterceptor;
 import com.khusainov.rinat.flickr.data.api.FlickrApi;
-import com.squareup.picasso.BuildConfig;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,31 +38,22 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
     }
 
     public void bindData(List<Photo> photos) {
-        mPhotos.clear();
-        mPhotos.addAll(photos);
+        mPhotos = new ArrayList<>(photos);
         notifyDataSetChanged();
     }
 
     static class PhotoViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mOwnerTextView;
         private ImageView mPhotoImageView;
 
         public PhotoViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mPhotoImageView = itemView.findViewById(R.id.photo_image_view);
-            mOwnerTextView = itemView.findViewById(R.id.owner_text_view);
         }
 
         private void bind(Photo photo) {
-//            Picasso.get().load(parseUrl(photo))
-//                    .fit().centerCrop()
-//                    .into(mPhotoImageView);
-
-            Glide.with(itemView.getContext()).load(parseUrl(photo)).into(mPhotoImageView);
-
-            mOwnerTextView.setText(photo.getOwner());
+            Glide.with(itemView.getContext()).load(parseUrl(photo)).centerCrop().into(mPhotoImageView);
         }
 
         private String parseUrl(Photo photo) {
@@ -85,7 +75,5 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
                     image_format;
             return url;
         }
-
-//        https://farm66.staticflickr.com/65535/49595265178_2ef7764331.jpg
     }
 }
