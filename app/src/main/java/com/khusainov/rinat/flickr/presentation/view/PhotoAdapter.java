@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.khusainov.rinat.flickr.R;
-import com.khusainov.rinat.flickr.data.model.Photo;
+import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
 
-    private List<Photo> mPhotos = new ArrayList<>();
+    private List<PhotoEntity> mPhotos = new ArrayList<>();
 
     @NonNull
     @Override
@@ -28,7 +28,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
 
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
-        Photo photo = mPhotos.get(position);
+        PhotoEntity photo = mPhotos.get(position);
         holder.bind(photo);
     }
 
@@ -37,7 +37,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
         return mPhotos.size();
     }
 
-    public void bindData(List<Photo> photos) {
+    public void bindData(List<PhotoEntity> photos) {
         mPhotos = new ArrayList<>(photos);
         notifyDataSetChanged();
     }
@@ -52,11 +52,11 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
             mPhotoImageView = itemView.findViewById(R.id.photo_image_view);
         }
 
-        private void bind(Photo photo) {
+        private void bind(PhotoEntity photo) {
             Glide.with(itemView.getContext()).load(parseUrl(photo)).centerCrop().into(mPhotoImageView);
         }
 
-        private String parseUrl(Photo photo) {
+        private String parseUrl(PhotoEntity photo) {
             String protocol = "https://";
             String farm = "farm";
             String domain = ".staticflickr.com/";

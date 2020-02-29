@@ -1,22 +1,14 @@
-package com.khusainov.rinat.flickr.data.model;
+package com.khusainov.rinat.flickr.domain.model;
 
-import com.google.gson.annotations.SerializedName;
-
-public class Photo {
-    @SerializedName("id")
+public class PhotoEntity {
     private String id;
-    @SerializedName("owner")
     private String owner;
-    @SerializedName("secret")
     private String secret;
-    @SerializedName("server")
     private String server;
-    @SerializedName("farm")
     private Integer farm;
-    @SerializedName("title")
     private String title;
 
-    public Photo(String id, String owner, String secret, String server, Integer farm, String title) {
+    public PhotoEntity(String id, String owner, String secret, String server, Integer farm, String title) {
         this.id = id;
         this.owner = owner;
         this.secret = secret;

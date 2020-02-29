@@ -1,42 +1,33 @@
 package com.khusainov.rinat.flickr.presentation.view;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khusainov.rinat.flickr.R;
-import com.khusainov.rinat.flickr.data.model.PhotoResponse;
-import com.khusainov.rinat.flickr.presentation.utils.ApiUtils;
+import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
+import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
+import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
-
+    private PhotoViewModel mPhotoViewModel;
     private RecyclerView mPhotoRecyclerView;
     private PhotoAdapter mPhotoAdapter = new PhotoAdapter();
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        loadPhotos();
     }
 
     @Override
@@ -49,25 +40,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setupMvvm();
         mPhotoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mPhotoRecyclerView.setAdapter(mPhotoAdapter);
     }
 
-    @SuppressLint("CheckResult")
-    private void loadPhotos() {
-        mCompositeDisposable.add(ApiUtils.getApi().getRecentPhotos(1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<PhotoResponse>() {
-                    @Override
-                    public void accept(PhotoResponse response) throws Exception {
-                        mPhotoAdapter.bindData(response.getPhotos().getPhoto());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-                    }
-                }));
+    private void setupMvvm() {
+        PhotoFactory factory = new PhotoFactory();
+        mPhotoViewModel = new ViewModelProvider(this, factory).get(PhotoViewModel.class);
+
+        mPhotoViewModel.getPhotos().observe(this, new Observer<List<PhotoEntity>>() {
+            @Override
+            public void onChanged(List<PhotoEntity> photoEntities) {
+                mPhotoAdapter.bindData(photoEntities);
+            }
+        });
     }
 }
