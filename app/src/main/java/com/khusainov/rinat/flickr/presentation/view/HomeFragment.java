@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +18,6 @@ import com.khusainov.rinat.flickr.R;
 import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
 import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
-
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -49,10 +48,10 @@ public class HomeFragment extends Fragment {
         PhotoFactory factory = new PhotoFactory();
         mPhotoViewModel = new ViewModelProvider(this, factory).get(PhotoViewModel.class);
 
-        mPhotoViewModel.getPhotos().observe(this, new Observer<List<PhotoEntity>>() {
+        mPhotoViewModel.getPhotos().observe(this, new Observer<PagedList<PhotoEntity>>() {
             @Override
-            public void onChanged(List<PhotoEntity> photoEntities) {
-                mPhotoAdapter.bindData(photoEntities);
+            public void onChanged(PagedList<PhotoEntity> photoEntities) {
+                mPhotoAdapter.submitList(photoEntities);
             }
         });
     }

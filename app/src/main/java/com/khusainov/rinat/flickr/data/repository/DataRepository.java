@@ -22,7 +22,7 @@ public class DataRepository implements IDataRepository {
     @SuppressWarnings("unchecked cast")
     @Override
     public Observable<List<PhotoEntity>> getPhotos() {
-        return ApiUtils.getApi().getRecentPhotos(1)
+        return ApiUtils.getApi().getRecentPhotos(1,20)
                 .map(new Function<PhotoResponse, List<PhotoEntity>>() {
                     @Override
                     public List<PhotoEntity> apply(PhotoResponse response) throws Exception {

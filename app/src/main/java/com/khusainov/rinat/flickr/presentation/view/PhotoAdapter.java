@@ -6,18 +6,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.khusainov.rinat.flickr.R;
 import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 
-import java.util.ArrayList;
-import java.util.List;
+public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.PhotoViewHolder> {
 
-public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
-
-    private List<PhotoEntity> mPhotos = new ArrayList<>();
+    protected PhotoAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
     @NonNull
     @Override
@@ -28,18 +29,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
 
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
-        PhotoEntity photo = mPhotos.get(position);
+        PhotoEntity photo = getItem(position);
         holder.bind(photo);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mPhotos.size();
-    }
-
-    public void bindData(List<PhotoEntity> photos) {
-        mPhotos = new ArrayList<>(photos);
-        notifyDataSetChanged();
     }
 
     static class PhotoViewHolder extends RecyclerView.ViewHolder {
@@ -76,4 +67,17 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
             return url;
         }
     }
+
+    private static DiffUtil.ItemCallback<PhotoEntity> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<PhotoEntity>() {
+                @Override
+                public boolean areItemsTheSame(PhotoEntity oldPhotoEntity, PhotoEntity newPhotoEntity) {
+                    return oldPhotoEntity.getId() == newPhotoEntity.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(PhotoEntity oldPhotoEntity, PhotoEntity newPhotoEntity) {
+                    return oldPhotoEntity.equals(newPhotoEntity);
+                }
+            };
 }

@@ -2,6 +2,8 @@ package com.khusainov.rinat.flickr.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Photo {
     @SerializedName("id")
     private String id;
@@ -71,5 +73,35 @@ public class Photo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photo photo = (Photo) o;
+        return Objects.equals(id, photo.id) &&
+                Objects.equals(owner, photo.owner) &&
+                Objects.equals(secret, photo.secret) &&
+                Objects.equals(server, photo.server) &&
+                Objects.equals(farm, photo.farm) &&
+                Objects.equals(title, photo.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, owner, secret, server, farm, title);
+    }
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id='" + id + '\'' +
+                ", owner='" + owner + '\'' +
+                ", secret='" + secret + '\'' +
+                ", server='" + server + '\'' +
+                ", farm=" + farm +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

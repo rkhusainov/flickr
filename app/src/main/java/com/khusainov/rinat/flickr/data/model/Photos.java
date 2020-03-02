@@ -3,6 +3,7 @@ package com.khusainov.rinat.flickr.data.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Photos {
     @SerializedName("page")
@@ -54,5 +55,33 @@ public class Photos {
 
     public void setPhoto(List<Photo> photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photos photos = (Photos) o;
+        return Objects.equals(page, photos.page) &&
+                Objects.equals(pages, photos.pages) &&
+                Objects.equals(perpage, photos.perpage) &&
+                Objects.equals(total, photos.total) &&
+                Objects.equals(photo, photos.photo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(page, pages, perpage, total, photo);
+    }
+
+    @Override
+    public String toString() {
+        return "Photos{" +
+                "page=" + page +
+                ", pages=" + pages +
+                ", perpage=" + perpage +
+                ", total=" + total +
+                ", photo=" + photo +
+                '}';
     }
 }

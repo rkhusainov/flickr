@@ -1,5 +1,9 @@
 package com.khusainov.rinat.flickr.domain.model;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 public class PhotoEntity {
     private String id;
     private String owner;
@@ -63,5 +67,36 @@ public class PhotoEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhotoEntity that = (PhotoEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(owner, that.owner) &&
+                Objects.equals(secret, that.secret) &&
+                Objects.equals(server, that.server) &&
+                Objects.equals(farm, that.farm) &&
+                Objects.equals(title, that.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, owner, secret, server, farm, title);
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return "PhotoEntity{" +
+                "id='" + id + '\'' +
+                ", owner='" + owner + '\'' +
+                ", secret='" + secret + '\'' +
+                ", server='" + server + '\'' +
+                ", farm=" + farm +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
