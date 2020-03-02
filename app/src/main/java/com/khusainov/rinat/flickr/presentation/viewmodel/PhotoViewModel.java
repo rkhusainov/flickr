@@ -11,7 +11,6 @@ import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 public class PhotoViewModel extends ViewModel {
 
     private LiveData<PagedList<PhotoEntity>> mPhotos;
-
     private PhotoDataSourceFactory mPhotoDataSourceFactory;
 
     public PhotoViewModel() {

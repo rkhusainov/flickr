@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment {
     private void setupMvvm() {
         PhotoFactory factory = new PhotoFactory();
         mPhotoViewModel = new ViewModelProvider(this, factory).get(PhotoViewModel.class);
-
         mPhotoViewModel.getPhotos().observe(this, new Observer<PagedList<PhotoEntity>>() {
             @Override
             public void onChanged(PagedList<PhotoEntity> photoEntities) {
