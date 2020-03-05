@@ -37,4 +37,10 @@ public class PhotoViewModel extends ViewModel {
     public LiveData<PagedList<PhotoEntity>> getPhotos() {
         return mPhotos;
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        AppDelegate.destroyGalleryComponent();
+    }
 }

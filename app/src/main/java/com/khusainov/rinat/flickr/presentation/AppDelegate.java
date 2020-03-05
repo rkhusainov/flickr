@@ -17,17 +17,22 @@ public class AppDelegate extends Application {
 
         sAppComponent = DaggerAppComponent.builder()
                 .build();
+    }
 
-        sGalleryComponent = DaggerGalleryComponent.builder()
-                .appComponent(getAppComponent())
-                .build();
+    public static GalleryComponent getGalleryComponent() {
+        if (sGalleryComponent == null) {
+            sGalleryComponent = DaggerGalleryComponent.builder()
+                    .appComponent(getAppComponent())
+                    .build();
+        }
+        return sGalleryComponent;
     }
 
     public static AppComponent getAppComponent() {
         return sAppComponent;
     }
 
-    public static GalleryComponent getGalleryComponent() {
-        return sGalleryComponent;
+    public static void destroyGalleryComponent() {
+        sGalleryComponent = null;
     }
 }
