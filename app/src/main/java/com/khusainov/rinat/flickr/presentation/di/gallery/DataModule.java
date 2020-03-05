@@ -3,6 +3,8 @@ package com.khusainov.rinat.flickr.presentation.di.gallery;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSource;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
 import com.khusainov.rinat.flickr.data.mapper.PhotoMapper;
+import com.khusainov.rinat.flickr.data.repository.PhotoRepository;
+import com.khusainov.rinat.flickr.domain.repository.IPhotoRepository;
 import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
 
 import dagger.Module;
@@ -18,8 +20,14 @@ public class DataModule {
 
     @Provides
     @PerFeature
-    PhotoDataSource providePhotoDataSource(PhotoMapper mapper) {
-        return new PhotoDataSource(mapper);
+    PhotoDataSource providePhotoDataSource() {
+        return new PhotoDataSource();
+    }
+
+    @Provides
+    @PerFeature
+    IPhotoRepository providePhotoRepository(PhotoMapper mapper) {
+        return new PhotoRepository(mapper);
     }
 
     @Provides
@@ -33,4 +41,6 @@ public class DataModule {
     PhotoDataSourceFactory providePhotoDataSourceFactory() {
         return new PhotoDataSourceFactory();
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.khusainov.rinat.flickr.presentation.di.gallery;
 import com.khusainov.rinat.flickr.data.api.FlickrApi;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSource;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
+import com.khusainov.rinat.flickr.domain.repository.IPhotoRepository;
 import com.khusainov.rinat.flickr.presentation.di.app.AppComponent;
 import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
 import com.khusainov.rinat.flickr.presentation.view.PhotoAdapter;
@@ -16,6 +17,8 @@ public interface GalleryComponent {
     FlickrApi getApi();
 
     PhotoDataSource getPhotoDataSource();
+
+    IPhotoRepository getPhotoRepository();
 
     PhotoViewModel getPhotoViewModel();
 
