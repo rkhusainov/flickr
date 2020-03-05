@@ -16,7 +16,6 @@ public class PhotoDataSourceFactory extends DataSource.Factory {
 
     @Override
     public DataSource create() {
-//        mPhotoDataSource = new PhotoDataSource(mPhotoMapper);
         mSourceLiveData.postValue(mPhotoDataSource);
         return mPhotoDataSource;
     }
