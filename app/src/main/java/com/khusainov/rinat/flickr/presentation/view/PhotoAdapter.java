@@ -16,7 +16,7 @@ import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 
 public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.PhotoViewHolder> {
 
-    protected PhotoAdapter() {
+    public PhotoAdapter() {
         super(DIFF_CALLBACK);
     }
 

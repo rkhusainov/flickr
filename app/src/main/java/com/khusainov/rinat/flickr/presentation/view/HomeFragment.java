@@ -16,14 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.khusainov.rinat.flickr.R;
 import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
+import com.khusainov.rinat.flickr.presentation.AppDelegate;
 import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
 import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
 
 public class HomeFragment extends Fragment {
 
+    private PhotoFactory mPhotoFactory;
     private PhotoViewModel mPhotoViewModel;
     private RecyclerView mPhotoRecyclerView;
-    private PhotoAdapter mPhotoAdapter = new PhotoAdapter();
+    private PhotoAdapter mPhotoAdapter;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -40,14 +42,16 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mPhotoAdapter = AppDelegate.getGalleryComponent().getPhotoAdapter();
+        mPhotoFactory = AppDelegate.getGalleryComponent().getPhotoFactory();
+
         setupMvvm();
         mPhotoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mPhotoRecyclerView.setAdapter(mPhotoAdapter);
     }
 
     private void setupMvvm() {
-        PhotoFactory factory = new PhotoFactory();
-        mPhotoViewModel = new ViewModelProvider(this, factory).get(PhotoViewModel.class);
+        mPhotoViewModel = new ViewModelProvider(this, mPhotoFactory).get(PhotoViewModel.class);
         mPhotoViewModel.getPhotos().observe(this, new Observer<PagedList<PhotoEntity>>() {
             @Override
             public void onChanged(PagedList<PhotoEntity> photoEntities) {

@@ -18,15 +18,12 @@ import io.reactivex.functions.Function;
 
 public class PhotoDataSource extends PageKeyedDataSource<Integer, PhotoEntity> {
 
-//    @Inject
-    FlickrApi mApi;
-
+    private FlickrApi mApi;
     private IMapper mMapper;
 
     public PhotoDataSource(IMapper mapper) {
         mMapper = mapper;
-        mApi = AppDelegate.getAppComponent().getApi();
-//        AppDelegate.getAppComponent().inject(this);
+        mApi = AppDelegate.getGalleryComponent().getApi();
     }
 
     @SuppressLint("CheckResult")

@@ -7,18 +7,22 @@ import androidx.paging.PagedList;
 
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
 import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
+import com.khusainov.rinat.flickr.presentation.AppDelegate;
+
+import javax.inject.Inject;
 
 public class PhotoViewModel extends ViewModel {
 
     private LiveData<PagedList<PhotoEntity>> mPhotos;
-    private PhotoDataSourceFactory mPhotoDataSourceFactory;
+    @Inject
+    PhotoDataSourceFactory mPhotoDataSourceFactory;
 
     public PhotoViewModel() {
+        AppDelegate.getGalleryComponent().inject(this);
         DataSourceFactorInit();
     }
 
     private void DataSourceFactorInit() {
-        mPhotoDataSourceFactory = new PhotoDataSourceFactory();
 
         PagedList.Config pagedListConfig =
                 (new PagedList.Config.Builder())
