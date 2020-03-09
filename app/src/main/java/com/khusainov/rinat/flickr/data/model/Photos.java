@@ -17,6 +17,14 @@ public class Photos {
     @SerializedName("photo")
     private List<Photo> photo = null;
 
+    public Photos(Integer page, Integer pages, Integer perpage, Integer total, List<Photo> photo) {
+        this.page = page;
+        this.pages = pages;
+        this.perpage = perpage;
+        this.total = total;
+        this.photo = photo;
+    }
+
     public Integer getPage() {
         return page;
     }

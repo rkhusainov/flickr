@@ -6,6 +6,10 @@ public class PhotoResponse {
     @SerializedName("photos")
     private Photos mPhotos;
 
+    public PhotoResponse(Photos photos) {
+        mPhotos = photos;
+    }
+
     public Photos getPhotos() {
         return mPhotos;
     }
