@@ -1,14 +1,19 @@
 package com.khusainov.rinat.flickr;
 
-import android.content.Context;
-
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 
+import com.khusainov.rinat.flickr.presentation.view.MainActivity;
+
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -17,11 +22,21 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.khusainov.rinat.flickr", appContext.getPackageName());
+    private MainPage page = new MainPage();
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void checkHomeFragmentIsDisplayed() {
+        onView(withId(R.id.home_fragment)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void checkRecyclerView() {
+        page.getRecyclerView().check(matches(isDisplayed()));
+        page.getRecyclerView().perform(RecyclerViewActions.scrollToPosition(40));
+    }
+
 }
