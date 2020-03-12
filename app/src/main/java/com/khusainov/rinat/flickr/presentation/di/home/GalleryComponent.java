@@ -1,13 +1,13 @@
-package com.khusainov.rinat.flickr.presentation.di.gallery;
+package com.khusainov.rinat.flickr.presentation.di.home;
 
 import com.khusainov.rinat.flickr.data.api.FlickrApi;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSource;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
 import com.khusainov.rinat.flickr.domain.repository.IPhotoRepository;
 import com.khusainov.rinat.flickr.presentation.di.app.AppComponent;
-import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
-import com.khusainov.rinat.flickr.presentation.view.PhotoAdapter;
-import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
+import com.khusainov.rinat.flickr.presentation.di.scope.PerFeature;
+import com.khusainov.rinat.flickr.presentation.ui.factory.PhotoFactory;
+import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 import dagger.Component;
 
@@ -21,8 +21,6 @@ public interface GalleryComponent {
     IPhotoRepository getPhotoRepository();
 
     PhotoViewModel getPhotoViewModel();
-
-    PhotoAdapter getPhotoAdapter();
 
     PhotoFactory getPhotoFactory();
 

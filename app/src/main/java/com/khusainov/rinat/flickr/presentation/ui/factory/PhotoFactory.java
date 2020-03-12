@@ -1,11 +1,11 @@
-package com.khusainov.rinat.flickr.presentation.factory;
+package com.khusainov.rinat.flickr.presentation.ui.factory;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.khusainov.rinat.flickr.presentation.AppDelegate;
-import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
+import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 public class PhotoFactory extends ViewModelProvider.NewInstanceFactory {
 

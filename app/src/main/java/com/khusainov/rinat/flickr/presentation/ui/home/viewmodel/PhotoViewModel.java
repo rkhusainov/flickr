@@ -1,4 +1,4 @@
-package com.khusainov.rinat.flickr.presentation.viewmodel;
+package com.khusainov.rinat.flickr.presentation.ui.home.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;

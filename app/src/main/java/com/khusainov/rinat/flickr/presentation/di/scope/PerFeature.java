@@ -1,4 +1,4 @@
-package com.khusainov.rinat.flickr.presentation.di.gallery;
+package com.khusainov.rinat.flickr.presentation.di.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

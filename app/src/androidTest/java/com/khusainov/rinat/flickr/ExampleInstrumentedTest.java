@@ -4,7 +4,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
-import com.khusainov.rinat.flickr.presentation.view.MainActivity;
+import com.khusainov.rinat.flickr.presentation.ui.home.view.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.khusainov.rinat.flickr.presentation.di.app.AppComponent;
 import com.khusainov.rinat.flickr.presentation.di.app.DaggerAppComponent;
-import com.khusainov.rinat.flickr.presentation.di.gallery.DaggerGalleryComponent;
-import com.khusainov.rinat.flickr.presentation.di.gallery.GalleryComponent;
+import com.khusainov.rinat.flickr.presentation.di.home.DaggerGalleryComponent;
+import com.khusainov.rinat.flickr.presentation.di.home.GalleryComponent;
 
 public class AppDelegate extends Application {
     private static AppComponent sAppComponent;

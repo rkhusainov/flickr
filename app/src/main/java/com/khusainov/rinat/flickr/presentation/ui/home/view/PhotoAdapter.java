@@ -1,4 +1,4 @@
-package com.khusainov.rinat.flickr.presentation.view;
+package com.khusainov.rinat.flickr.presentation.ui.home.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +16,11 @@ import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 
 public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.PhotoViewHolder> {
 
-    public PhotoAdapter() {
+    private OnItemClickListener mOnItemClickListener;
+
+    public PhotoAdapter(OnItemClickListener listener) {
         super(DIFF_CALLBACK);
+        mOnItemClickListener = listener;
     }
 
     @NonNull
@@ -30,7 +33,7 @@ public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.Pho
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
         PhotoEntity photo = getItem(position);
-        holder.bind(photo);
+        holder.bind(photo, mOnItemClickListener);
     }
 
     static class PhotoViewHolder extends RecyclerView.ViewHolder {
@@ -43,8 +46,15 @@ public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.Pho
             mPhotoImageView = itemView.findViewById(R.id.photo_image_view);
         }
 
-        private void bind(PhotoEntity photo) {
+        private void bind(PhotoEntity photo, OnItemClickListener listener) {
             Glide.with(itemView.getContext()).load(parseUrl(photo)).centerCrop().into(mPhotoImageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onClick(photo.getId());
+                }
+            });
         }
 
         private String parseUrl(PhotoEntity photo) {
@@ -53,7 +63,7 @@ public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.Pho
             String domain = ".staticflickr.com/";
             String slash = "/";
             String underscore = "_";
-            String size = "z";
+            String size = "q";
             String image_format = ".jpg";
             String url = protocol +
                     farm +
@@ -80,4 +90,8 @@ public class PhotoAdapter extends PagedListAdapter<PhotoEntity, PhotoAdapter.Pho
                     return oldPhotoEntity.equals(newPhotoEntity);
                 }
             };
+
+    public interface OnItemClickListener {
+        void onClick(String photoId);
+    }
 }

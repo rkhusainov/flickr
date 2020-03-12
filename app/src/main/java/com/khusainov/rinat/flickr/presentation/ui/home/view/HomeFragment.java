@@ -1,5 +1,6 @@
-package com.khusainov.rinat.flickr.presentation.view;
+package com.khusainov.rinat.flickr.presentation.ui.home.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khusainov.rinat.flickr.R;
 import com.khusainov.rinat.flickr.domain.model.PhotoEntity;
 import com.khusainov.rinat.flickr.presentation.AppDelegate;
-import com.khusainov.rinat.flickr.presentation.factory.PhotoFactory;
-import com.khusainov.rinat.flickr.presentation.viewmodel.PhotoViewModel;
+import com.khusainov.rinat.flickr.presentation.ui.detail.view.DetailFragment;
+import com.khusainov.rinat.flickr.presentation.ui.factory.PhotoFactory;
+import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 public class HomeFragment extends Fragment {
 
@@ -27,8 +29,26 @@ public class HomeFragment extends Fragment {
     private RecyclerView mPhotoRecyclerView;
     private PhotoAdapter mPhotoAdapter;
 
+    private PhotoAdapter.OnItemClickListener mOnItemClickListener = new PhotoAdapter.OnItemClickListener() {
+        @Override
+        public void onClick(String photoId) {
+            if (getFragmentManager() != null) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, DetailFragment.newInstance(photoId))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
+    };
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -42,7 +62,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPhotoAdapter = AppDelegate.getGalleryComponent().getPhotoAdapter();
+        mPhotoAdapter = new PhotoAdapter(mOnItemClickListener);
         mPhotoFactory = AppDelegate.getGalleryComponent().getPhotoFactory();
 
         setupMvvm();

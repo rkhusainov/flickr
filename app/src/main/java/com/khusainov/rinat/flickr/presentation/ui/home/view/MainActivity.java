@@ -1,4 +1,4 @@
-package com.khusainov.rinat.flickr.presentation.view;
+package com.khusainov.rinat.flickr.presentation.ui.home.view;
 
 import android.os.Bundle;
 
