@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.khusainov.rinat.flickr.R;
 import com.khusainov.rinat.flickr.domain.model.PhotoInfoEntity;
+import com.khusainov.rinat.flickr.presentation.AppDelegate;
 import com.khusainov.rinat.flickr.presentation.ui.detail.viewmodel.PhotoInfoViewModel;
 import com.khusainov.rinat.flickr.presentation.ui.factory.PhotoInfoFactory;
 
@@ -27,6 +28,7 @@ public class DetailFragment extends Fragment {
     private TextView mUsernameTextView;
     private TextView mTitleTextView;
     private PhotoView mPhotoView;
+    private PhotoInfoFactory mPhotoInfoFactory;
 
     public static DetailFragment newInstance(String photoID) {
 
@@ -64,8 +66,8 @@ public class DetailFragment extends Fragment {
     }
 
     private void setupMvvm() {
-        PhotoInfoFactory photoInfoFactory = new PhotoInfoFactory();
-        PhotoInfoViewModel photoInfoViewModel = new ViewModelProvider(this, photoInfoFactory).get(PhotoInfoViewModel.class);
+        mPhotoInfoFactory = AppDelegate.getDetailComponent().getPhotoInfoFactory();
+        PhotoInfoViewModel photoInfoViewModel = new ViewModelProvider(this, mPhotoInfoFactory).get(PhotoInfoViewModel.class);
         photoInfoViewModel.getPhotoInfo(mPhotoId);
         photoInfoViewModel.getPhotoInfo().observe(this, new Observer<PhotoInfoEntity>() {
             @Override
@@ -95,5 +97,11 @@ public class DetailFragment extends Fragment {
                 size +
                 image_format;
         return url;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        AppDelegate.destroyDetailComponent();
     }
 }

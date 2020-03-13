@@ -18,7 +18,7 @@ public class PhotoDataSource extends PageKeyedDataSource<Integer, PhotoEntity> {
     private IPhotoRepository mPhotoRepository;
 
     public PhotoDataSource() {
-        mPhotoRepository = AppDelegate.getGalleryComponent().getPhotoRepository();
+        mPhotoRepository = AppDelegate.getHomeComponent().getPhotoRepository();
     }
 
     @SuppressLint("CheckResult")

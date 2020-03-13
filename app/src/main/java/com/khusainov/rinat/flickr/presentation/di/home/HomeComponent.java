@@ -5,15 +5,15 @@ import com.khusainov.rinat.flickr.data.datasource.PhotoDataSource;
 import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
 import com.khusainov.rinat.flickr.domain.repository.IPhotoRepository;
 import com.khusainov.rinat.flickr.presentation.di.app.AppComponent;
-import com.khusainov.rinat.flickr.presentation.di.scope.PerFeature;
+import com.khusainov.rinat.flickr.presentation.di.scope.PerScreen;
 import com.khusainov.rinat.flickr.presentation.ui.factory.PhotoFactory;
 import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 import dagger.Component;
 
-@PerFeature
-@Component(dependencies = {AppComponent.class}, modules = {DataModule.class, FragmentModule.class})
-public interface GalleryComponent {
+@PerScreen
+@Component(dependencies = {AppComponent.class}, modules = {DataModule.class})
+public interface HomeComponent {
     FlickrApi getApi();
 
     PhotoDataSource getPhotoDataSource();

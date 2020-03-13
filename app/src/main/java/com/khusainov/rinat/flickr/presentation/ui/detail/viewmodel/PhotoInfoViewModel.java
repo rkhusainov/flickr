@@ -10,7 +10,6 @@ import com.khusainov.rinat.flickr.domain.intercator.IPhotoInfoInteractor;
 import com.khusainov.rinat.flickr.domain.model.PhotoInfoEntity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -29,17 +28,8 @@ public class PhotoInfoViewModel extends ViewModel {
         mPhotoInfoInteractor.getPhotoInfoEntity(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<PhotoInfoEntity>() {
-                    @Override
-                    public void accept(PhotoInfoEntity photoInfoEntity) throws Exception {
-                        mPhotoInfo.postValue(photoInfoEntity);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAG, "accept: Error");
-                    }
-                });
+                .subscribe(photoInfoEntity -> mPhotoInfo.postValue(photoInfoEntity),
+                        throwable -> Log.e(TAG, "accept: Error"));
     }
 
     public MutableLiveData<PhotoInfoEntity> getPhotoInfo() {

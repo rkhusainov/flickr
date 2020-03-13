@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mPhotoAdapter = new PhotoAdapter(mOnItemClickListener);
-        mPhotoFactory = AppDelegate.getGalleryComponent().getPhotoFactory();
+        mPhotoFactory = AppDelegate.getHomeComponent().getPhotoFactory();
 
         setupMvvm();
         mPhotoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
@@ -78,5 +78,11 @@ public class HomeFragment extends Fragment {
                 mPhotoAdapter.submitList(photoEntities);
             }
         });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        AppDelegate.destroyHomeComponent();
     }
 }

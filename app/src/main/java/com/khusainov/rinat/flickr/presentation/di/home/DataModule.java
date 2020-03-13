@@ -5,7 +5,8 @@ import com.khusainov.rinat.flickr.data.datasource.PhotoDataSourceFactory;
 import com.khusainov.rinat.flickr.data.mapper.PhotoMapper;
 import com.khusainov.rinat.flickr.data.repository.PhotoRepository;
 import com.khusainov.rinat.flickr.domain.repository.IPhotoRepository;
-import com.khusainov.rinat.flickr.presentation.di.scope.PerFeature;
+import com.khusainov.rinat.flickr.presentation.di.scope.PerScreen;
+import com.khusainov.rinat.flickr.presentation.ui.factory.PhotoFactory;
 import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 import dagger.Module;
@@ -14,32 +15,38 @@ import dagger.Provides;
 @Module
 public class DataModule {
     @Provides
-    @PerFeature
+    @PerScreen
     PhotoMapper providePhotoMapper() {
         return new PhotoMapper();
     }
 
     @Provides
-    @PerFeature
+    @PerScreen
     PhotoDataSource providePhotoDataSource() {
         return new PhotoDataSource();
     }
 
     @Provides
-    @PerFeature
+    @PerScreen
     IPhotoRepository providePhotoRepository(PhotoMapper mapper) {
         return new PhotoRepository(mapper);
     }
 
     @Provides
-    @PerFeature
+    @PerScreen
     PhotoViewModel providePhotoViewModel() {
         return new PhotoViewModel();
     }
 
     @Provides
-    @PerFeature
+    @PerScreen
     PhotoDataSourceFactory providePhotoDataSourceFactory() {
         return new PhotoDataSourceFactory();
+    }
+
+    @Provides
+    @PerScreen
+    PhotoFactory providePhotoFactory() {
+        return new PhotoFactory();
     }
 }

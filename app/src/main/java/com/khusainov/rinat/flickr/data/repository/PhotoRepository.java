@@ -19,7 +19,7 @@ public class PhotoRepository implements IPhotoRepository {
 
     public PhotoRepository(IMapper mapper) {
         mMapper = mapper;
-        mApi = AppDelegate.getGalleryComponent().getApi();
+        mApi = AppDelegate.getHomeComponent().getApi();
     }
 
     @Override

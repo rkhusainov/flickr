@@ -17,7 +17,7 @@ public class PhotoInfoRepository implements IPhotoInfoRepository {
 
     public PhotoInfoRepository(IMapper mapper) {
         mMapper = mapper;
-        mApi = AppDelegate.getGalleryComponent().getApi();
+        mApi = AppDelegate.getDetailComponent().getApi();
     }
 
     @Override

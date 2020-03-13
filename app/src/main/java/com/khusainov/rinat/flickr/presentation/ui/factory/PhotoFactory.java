@@ -9,7 +9,7 @@ import com.khusainov.rinat.flickr.presentation.ui.home.viewmodel.PhotoViewModel;
 
 public class PhotoFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private PhotoViewModel mPhotoViewModel = AppDelegate.getGalleryComponent().getPhotoViewModel();
+    private PhotoViewModel mPhotoViewModel = AppDelegate.getHomeComponent().getPhotoViewModel();
 
     @SuppressWarnings("unchecked cast")
     @NonNull

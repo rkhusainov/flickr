@@ -18,7 +18,7 @@ public class PhotoViewModel extends ViewModel {
     PhotoDataSourceFactory mPhotoDataSourceFactory;
 
     public PhotoViewModel() {
-        AppDelegate.getGalleryComponent().inject(this);
+        AppDelegate.getHomeComponent().inject(this);
         DataSourceFactorInit();
     }
 
@@ -36,11 +36,5 @@ public class PhotoViewModel extends ViewModel {
 
     public LiveData<PagedList<PhotoEntity>> getPhotos() {
         return mPhotos;
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        AppDelegate.destroyGalleryComponent();
     }
 }

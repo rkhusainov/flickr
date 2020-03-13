@@ -11,7 +11,7 @@ public class PhotoDataSourceFactory extends DataSource.Factory {
     private PhotoDataSource mPhotoDataSource;
 
     public PhotoDataSourceFactory() {
-        mPhotoDataSource = AppDelegate.getGalleryComponent().getPhotoDataSource();
+        mPhotoDataSource = AppDelegate.getHomeComponent().getPhotoDataSource();
     }
 
     @Override
