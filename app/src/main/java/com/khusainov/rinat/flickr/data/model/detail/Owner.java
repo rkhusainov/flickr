@@ -23,6 +23,15 @@ public class Owner {
     @SerializedName("iconfarm")
     private Integer iconfarm;
 
+    public Owner(String nsid, String username, String realname, String location, String iconserver, Integer iconfarm) {
+        this.nsid = nsid;
+        this.username = username;
+        this.realname = realname;
+        this.location = location;
+        this.iconserver = iconserver;
+        this.iconfarm = iconfarm;
+    }
+
     public String getNsid() {
         return nsid;
     }

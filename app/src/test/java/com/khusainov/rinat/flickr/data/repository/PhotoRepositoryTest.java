@@ -63,6 +63,6 @@ public class PhotoRepositoryTest {
         assertEquals("Windows", photoResponse.getPhotos().getPhoto().get(0).getTitle());
         assertThat(photoResponse.getPhotos().getPhoto().get(0).getOwner(), equalTo("Bill Gates"));
         assertNotNull(photoResponse);
-        verify(mApi,times(1)).getRecentPhotos(PAGE, PAGE_SIZE);
+        verify(mApi, times(1)).getRecentPhotos(PAGE, PAGE_SIZE);
     }
 }
